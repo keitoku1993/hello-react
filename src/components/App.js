@@ -1,6 +1,10 @@
 import * as React from 'react';
 import axios from 'axios';
 
+import Header from './Header';
+import ChangeTab from './ChangeTab';
+import MemberList from './MemberList'
+
 class App extends React.Component {
 
     httpClient = '';
@@ -87,28 +91,9 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <ul>
-                    {this.state.departmentList.map((row,index)=>{
-                        return <li key={index}>{row.department_name}</li>;
-                    })}
-                </ul>
-
-                { this.state.isLogin ?
-                    <div>
-                        <button onClick={this.clickHandler}>ユーザも取得してみる</button>
-
-                        { this.state.user &&
-                        <div>
-                            { this.state.user.user_name }<br />{ this.state.user.description }
-                            <img src={this.state.user.main_photo_url} />
-                        </div>
-                        }
-                    </div>
-                    :
-                    <p>未ログイン</p>
-                }
-
-
+              <Header />
+              <ChangeTab />
+              <MemberList />
             </div>
         );
     }
