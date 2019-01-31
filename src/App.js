@@ -1,5 +1,5 @@
 import * as React from 'react';
-import axios, {AxiosInstance, AxiosResponse} from 'axios';
+import axios from 'axios';
 
 class App extends React.Component {
 
@@ -48,6 +48,7 @@ class App extends React.Component {
         return this.httpClient.get('/who/departments')
             .then(this.commonResponseHandling)
             .then((result)=>{
+                console.log(result);
                 this.setState({departmentList : result});
             })
     }
@@ -55,6 +56,14 @@ class App extends React.Component {
         return this.httpClient.get('/who/user/2')
             .then(this.commonResponseHandling)
             .then((result)=>{
+                this.setState({user : result});
+            })
+    }
+    loadSearch(){
+        return this.httpClient.get('/who/search' ,{params:{query:'さいとう'}})
+            .then(this.commonResponseHandling)
+            .then((result)=>{
+                console.log(result);
                 this.setState({user : result});
             })
     }
@@ -69,7 +78,7 @@ class App extends React.Component {
     }
 
     clickHandler = ()=>{
-        this.loadUser()
+        this.loadSearch()
             .catch((err)=>{
                 alert('エラー発生');
             });
