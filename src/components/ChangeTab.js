@@ -49,12 +49,12 @@ class ChangeTab extends React.Component {
             variant="scrollable"
             scrollButtons="auto"
           >
-            <Tab label="フリーワード検索" />
             <Tab label="部署名で絞り込み" />
+            <Tab label="フリーワード検索" />
           </Tabs>
         </AppBar>
-        {value === 1 && <TabContainer><UserSearch  /></TabContainer>}
-        {value === 2 && <TabContainer><DepartmentSearch /></TabContainer>}
+        {value === 1 && <TabContainer><DepartmentSearch loadDepartmentSearch={(id)=>this.props.loadDepartmentSearch(id)}/></TabContainer>}
+        {value === 2 && <TabContainer><UserSearch loadUserSearch={(word)=>this.props.loadUserSearch(word)}/></TabContainer>}
       </div>
     );
   }

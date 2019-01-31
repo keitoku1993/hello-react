@@ -13,7 +13,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             isLogin:false,
-            departmentList : [],
+            memberList : [],
             user:null,
         };
     }
@@ -48,27 +48,19 @@ class App extends React.Component {
                 }
             });
     }
-    loadDepartments(){
+    loadDepartmentSerch(){
         return this.httpClient.get('/who/departments')
             .then(this.commonResponseHandling)
             .then((result)=>{
                 console.log(result);
-                this.setState({departmentList : result});
+                this.setState({memberList : result});
             })
     }
-    loadUser(){
+    loadUserSearch(){
         return this.httpClient.get('/who/user/2')
             .then(this.commonResponseHandling)
             .then((result)=>{
-                this.setState({user : result});
-            })
-    }
-    loadSearch(){
-        return this.httpClient.get('/who/search' ,{params:{query:'さいとう'}})
-            .then(this.commonResponseHandling)
-            .then((result)=>{
-                console.log(result);
-                this.setState({user : result});
+                this.setState({memberList : result});
             })
     }
 
@@ -92,8 +84,10 @@ class App extends React.Component {
         return (
             <div>
               <Header />
-              <ChangeTab />
-              <MemberList />
+              <ChangeTab 
+                loadDepartmentSearch={(id) => this.loadDepartmentSearch(id)}
+                loadUserSearch={(word) => this.loadUserSearch(word)}/>
+              <MemberList  memberList={this.state.memberList}/>
             </div>
         );
     }

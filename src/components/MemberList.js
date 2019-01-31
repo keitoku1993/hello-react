@@ -1,25 +1,23 @@
 import React from 'react';
 
-import '../stylesheet/FighterList.css'
+import '../stylesheet/MemberList.css'
 
 const MemberList = (props) => {
-    const fighterList = props.filteredFighterList.map((value) => {
-        console.log(works);
+    const memberList = props.memberList.map((value) => {
         return(
-            <li className="fighter-list-item">
+            <li className="memberlist-item">
                 <div>
                     <img src={value.url} alt="image" width='150'></img>
                 </div>
-                <div className="fighter-list-item-text">
+                <div className="memberlist-item-text">
                     <p>{value.name}</p>
-                    <p>シリーズ: {value.series}</p>
-                    {works}
+                    <p>{value.series}</p>
                 </div>
             </li>
         )
     })
     return(
-        <ul className="fighter-list">{fighterList}</ul>
+        <ul className="memberlist">{memberList}</ul>
     )
 }
 

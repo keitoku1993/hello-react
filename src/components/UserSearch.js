@@ -27,7 +27,7 @@ const styles = theme => ({
   },
 });
 
-class CharacterSearch extends React.Component {
+class UserSearch extends React.Component {
   state = {
     name: '',
     age: '',
@@ -55,7 +55,7 @@ class CharacterSearch extends React.Component {
           margin="normal"
           placeholder="キャラクター名"
         />
-        <Button variant="contained" className={classes.button} onClick={()=>this.props.handleCharacterClick(this.state.name)}>
+        <Button variant="contained" className={classes.button} onClick={()=>this.props.loadUserSearch(this.state.name)}>
           Search
         </Button>
       </form>
@@ -63,8 +63,8 @@ class CharacterSearch extends React.Component {
   }
 }
 
-CharacterSearch.propTypes = {
+UserSearch.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CharacterSearch);
+export default withStyles(styles)(UserSearch);

@@ -28,7 +28,7 @@ const styles = theme => ({
   },
 });
 
-class SeriesSearch extends React.Component {
+class DepartmentSearch extends React.Component {
   state = {
     series: '',
   };
@@ -52,15 +52,15 @@ class SeriesSearch extends React.Component {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            <MenuItem value='スーパーマリオシリーズ'>スーパーマリオシリーズ</MenuItem>
-            <MenuItem value='ゼルダの伝説シリーズ'>ゼルダの伝説シリーズ</MenuItem>
-            <MenuItem value='スターフォックスシリーズ'>スターフォックスシリーズ</MenuItem>
-            <MenuItem value='ファイアーエムブレムシリーズ'>ファイアーエムブレムシリーズ</MenuItem>
-            <MenuItem value='ファイナルファンタジーシリーズ'>ファイナルファンタジーシリーズ</MenuItem>
-            <MenuItem value='メタルギアソリッドシリーズ'>メタルギアソリッドシリーズ</MenuItem>
+            <MenuItem value='1'>スーパーマリオシリーズ</MenuItem>
+            <MenuItem value='2'>ゼルダの伝説シリーズ</MenuItem>
+            <MenuItem value='3'>スターフォックスシリーズ</MenuItem>
+            <MenuItem value='4'>ファイアーエムブレムシリーズ</MenuItem>
+            <MenuItem value='5'>ファイナルファンタジーシリーズ</MenuItem>
+            <MenuItem value='6'>メタルギアソリッドシリーズ</MenuItem>
           </Select>
         </FormControl>
-        <Button variant="contained" className={classes.button} onClick={()=>this.props.handleSeriesClick(this.state.series)}>
+        <Button variant="contained" className={classes.button} onClick={()=>this.props.loadDepartmentSearch(this.state.series)}>
             Search
         </Button>
       </form>
@@ -68,8 +68,8 @@ class SeriesSearch extends React.Component {
   }
 }
 
-SeriesSearch.propTypes = {
+DepartmentSearch.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SeriesSearch);
+export default withStyles(styles)(DepartmentSearch);
