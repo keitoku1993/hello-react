@@ -72,11 +72,11 @@ class App extends React.Component {
                 this.setState({memberList : result.item_list});
             })
     }
-    loadUserSearch(userId){
-        return this.httpClient.get('/who/user/'+userId)
+    loadUserSearch(){
+        return this.httpClient.get('/who/user/2')
             .then(this.commonResponseHandling)
             .then((result)=>{
-                this.setState({user : result});
+                this.setState({memberList : result});
             })
     }
 
@@ -103,10 +103,7 @@ class App extends React.Component {
               <ChangeTab 
                 loadDepartmentSearch={(id) => this.loadDepartmentSearch(id)}
                 loadFreeWordSearch={(word) => this.loadFreeWordSearch(word)}/>
-              <MemberList  
-                user = {this.state.user}
-                memberList={this.state.memberList}
-                loadUserSearch={(userId)=>this.loadUserSearch(userId)}/>
+              <MemberList  memberList={this.state.memberList}/>
             </div>
         );
     }
