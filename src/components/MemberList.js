@@ -9,7 +9,7 @@ const MemberList = (props) => {
         user = props.loadUserSearch(value.user_id);
         userList.push(user);
     })
-    const memberList = props.memberList.map((value)=>{
+    const userList = props.memberList.map((value)=>{
         return (
             <li>{value.user_name}</li>
         )

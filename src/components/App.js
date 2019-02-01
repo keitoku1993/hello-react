@@ -72,8 +72,8 @@ class App extends React.Component {
                 this.setState({memberList : result.item_list});
             })
     }
-    loadUserSearch(){
-        this.httpClient.get('/who/user/2')
+    loadUserSearch(userId){
+        this.httpClient.get('/who/user/'+userId)
             .then(this.commonResponseHandling)
             .then((result)=>{
                 return result;
