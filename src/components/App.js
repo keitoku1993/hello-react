@@ -73,10 +73,10 @@ class App extends React.Component {
             })
     }
     loadUserSearch(){
-        return this.httpClient.get('/who/user/2')
+        this.httpClient.get('/who/user/2')
             .then(this.commonResponseHandling)
             .then((result)=>{
-                this.setState({memberList : result});
+                return result;
             })
     }
 
