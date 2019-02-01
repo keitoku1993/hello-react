@@ -33,6 +33,10 @@ class DepartmentSearch extends React.Component {
     series: '',
   };
 
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
   render() {
     const { classes } = this.props;
 

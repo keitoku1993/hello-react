@@ -34,6 +34,10 @@ class ChangeTab extends React.Component {
     value: 0,
   };
 
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   render() {
     const { classes } = this.props;
     const { value } = this.state;
@@ -53,8 +57,8 @@ class ChangeTab extends React.Component {
             <Tab label="フリーワード検索" />
           </Tabs>
         </AppBar>
-        {value === 1 && <TabContainer><DepartmentSearch loadDepartmentSearch={(id)=>this.props.loadDepartmentSearch(id)}/></TabContainer>}
-        {value === 2 && <TabContainer><UserSearch loadUserSearch={(word)=>this.props.loadUserSearch(word)}/></TabContainer>}
+        {value === 0 && <TabContainer><DepartmentSearch loadDepartmentSearch={(id)=>this.props.loadDepartmentSearch(id)}/></TabContainer>}
+        {value === 1 && <TabContainer><UserSearch loadUserSearch={(word)=>this.props.loadUserSearch(word)}/></TabContainer>}
       </div>
     );
   }
