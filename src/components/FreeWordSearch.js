@@ -27,7 +27,7 @@ const styles = theme => ({
   },
 });
 
-class UserSearch extends React.Component {
+class FreeWordSearch extends React.Component {
   state = {
     name: '',
     age: '',
@@ -53,9 +53,9 @@ class UserSearch extends React.Component {
           value={this.state.name}
           onChange={this.handleChange('name')}
           margin="normal"
-          placeholder="キャラクター名"
+          placeholder="単語を入れてください"
         />
-        <Button variant="contained" className={classes.button} onClick={()=>this.props.loadUserSearch(this.state.name)}>
+        <Button variant="contained" className={classes.button} onClick={()=>this.props.loadFreeWordSearch(this.state.name)}>
           Search
         </Button>
       </form>
@@ -63,8 +63,8 @@ class UserSearch extends React.Component {
   }
 }
 
-UserSearch.propTypes = {
+FreeWordSearch.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(UserSearch);
+export default withStyles(styles)(FreeWordSearch);

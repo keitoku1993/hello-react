@@ -15,6 +15,7 @@ class App extends React.Component {
             isLogin:false,
             memberList : [],
             user:null,
+            departmentList: [],
         };
     }
 
@@ -29,13 +30,12 @@ class App extends React.Component {
                 if(! this.state.isLogin){
                     return Promise.resolve();
                 }
-                return this.loadDepartments();
             })
             .catch((err)=>{
                 alert("APIがエラーを返しました\n\n" + err);
-            })
-
-        ;
+            });
+        
+        this.loadDepartment()
     }
     loadAuth(){
         return this.httpClient.get('/auth' , {params:{callback:'http://localhost:3000'}})
@@ -48,12 +48,28 @@ class App extends React.Component {
                 }
             });
     }
-    loadDepartmentSerch(){
+    loadDepartment(){
         return this.httpClient.get('/who/departments')
             .then(this.commonResponseHandling)
             .then((result)=>{
                 console.log(result);
-                this.setState({memberList : result});
+                this.setState({departmentList : result});
+            })
+    }
+    loadDepartmentSearch(id){
+        return this.httpClient.get('/who/search', {params:{department_id:id}})
+            .then(this.commonResponseHandling)
+            .then((result)=>{
+                console.log(result);
+                this.setState({memberList : result.item_list});
+            })
+    }
+    loadFreeWordSearch(word){
+        return this.httpClient.get('/who/search', {params:{query:word}})
+            .then(this.commonResponseHandling)
+            .then((result)=>{
+                console.log(result);
+                this.setState({memberList : result.item_list});
             })
     }
     loadUserSearch(){
@@ -86,7 +102,7 @@ class App extends React.Component {
               <Header />
               <ChangeTab 
                 loadDepartmentSearch={(id) => this.loadDepartmentSearch(id)}
-                loadUserSearch={(word) => this.loadUserSearch(word)}/>
+                loadFreeWordSearch={(word) => this.loadFreeWordSearch(word)}/>
               <MemberList  memberList={this.state.memberList}/>
             </div>
         );

@@ -35,6 +35,7 @@ class DepartmentSearch extends React.Component {
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+    this.props.loadDepartmentSearch(event.target.value);
   };
 
   render() {
@@ -43,30 +44,27 @@ class DepartmentSearch extends React.Component {
     return (
       <form className={classes.root} autoComplete="off">
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="age-simple">Series</InputLabel>
+          <InputLabel htmlFor="age-simple"> 部署名</InputLabel>
           <Select
             value={this.state.series}
-
             onChange={this.handleChange}
             inputProps={{
               name: 'series',
-              id: 'age-simple',
             }}
           >
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            <MenuItem value='1'>スーパーマリオシリーズ</MenuItem>
-            <MenuItem value='2'>ゼルダの伝説シリーズ</MenuItem>
-            <MenuItem value='3'>スターフォックスシリーズ</MenuItem>
-            <MenuItem value='4'>ファイアーエムブレムシリーズ</MenuItem>
-            <MenuItem value='5'>ファイナルファンタジーシリーズ</MenuItem>
-            <MenuItem value='6'>メタルギアソリッドシリーズ</MenuItem>
+            <MenuItem value='2'>MP事業部</MenuItem>
+            <MenuItem value='3'>OS事業部</MenuItem>
+            <MenuItem value='8'>UI/UX制作室</MenuItem>
+            <MenuItem value='4'>開発室</MenuItem>
+            <MenuItem value='5'>クリエイティブ室</MenuItem>
+            <MenuItem value='6'>QAグループ</MenuItem>
+            <MenuItem value='7'>経営企画室</MenuItem>
+            <MenuItem value='1'>ニジボックス</MenuItem>
           </Select>
         </FormControl>
-        <Button variant="contained" className={classes.button} onClick={()=>this.props.loadDepartmentSearch(this.state.series)}>
-            Search
-        </Button>
       </form>
     );
   }

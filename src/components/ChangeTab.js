@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
-import UserSearch from './UserSearch';
+import FreeWordSearch from './FreeWordSearch';
 import DepartmentSearch from './DepartmentSearch';
 
 function TabContainer(props) {
@@ -58,7 +58,7 @@ class ChangeTab extends React.Component {
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer><DepartmentSearch loadDepartmentSearch={(id)=>this.props.loadDepartmentSearch(id)}/></TabContainer>}
-        {value === 1 && <TabContainer><UserSearch loadUserSearch={(word)=>this.props.loadUserSearch(word)}/></TabContainer>}
+        {value === 1 && <TabContainer><FreeWordSearch loadFreeWordSearch={(word)=>this.props.loadFreeWordSearch(word)}/></TabContainer>}
       </div>
     );
   }
