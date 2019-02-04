@@ -1,0 +1,31 @@
+.memberlist{
+    display:flex;
+    flex-wrap:wrap;
+    list-style: none;
+    justify-content:center;
+}
+
+.memberlist-item{
+    width:150px;
+    border:1px solid #eee;
+    border-radius:6px;
+    text-align:center;
+    margin:8px;
+    box-shadow:4px 8px 20px -7px #6d786d;
+    padding:20px 10px;
+}
+
+.item-image{
+    width:100px;
+    border-radius:50%;
+}
+
+.item-name{
+    padding-top:14px;
+    font-size:16px;
+}
+
+.item-department{
+    font-size:12px;
+    color: darkgray;
+}

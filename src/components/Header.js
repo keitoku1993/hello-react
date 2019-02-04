@@ -22,14 +22,12 @@ const styles = {
 };
 
 function Header(props) {
-  const { classes } = props;
-
   return (
     <MuiThemeProvider theme={theme}>
       <AppBar position="static" color="primary">
         <Toolbar>
           <Typography variant="h6" color="secondary">
-            NIJIBOX Menber List
+            NIJIBOX Member List
           </Typography>
         </Toolbar>
       </AppBar>

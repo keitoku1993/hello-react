@@ -61,21 +61,28 @@ class App extends React.Component {
             .then((result)=>{
                 const userList = result.item_list;
                 this.user = [];
+                const promises = [];
                 userList.forEach((item) => {
-                    this.loadUserSearch(item.user_id);
+                    promises.push(this.loadUserSearch(item.user_id));
                 })
-                this.setState({memberList : this.user});
+                Promise.all(promises).then(()=>this.setState({memberList : this.user}));
             })
     }
     loadFreeWordSearch(word){
         return this.httpClient.get('/who/search', {params:{query:word}})
             .then(this.commonResponseHandling)
             .then((result)=>{
-                this.setState({memberList : result.item_list});
+                const userList = result.item_list;
+                this.user = [];
+                const promises = [];
+                userList.forEach((item) => {
+                    promises.push(this.loadUserSearch(item.user_id));
+                })
+                Promise.all(promises).then(()=>this.setState({memberList : this.user}));
             })
     }
     loadUserSearch(userId){
-        this.httpClient.get('/who/user/'+Number(userId))
+        return this.httpClient.get('/who/user/'+Number(userId))
             .then(this.commonResponseHandling)
             .then((result)=>{
                 this.user.push(result);
@@ -83,9 +90,9 @@ class App extends React.Component {
     }
 
     commonResponseHandling(res){
-        console.debug(res);
+        // console.debug(res);
         if(res.data.code !== "200"){
-            console.error(res.data.data);
+            // console.error(res.data.data);
             return Promise.reject("API Error:" + res.data.data.message);
         }
         return Promise.resolve(res.data.data);
@@ -105,7 +112,7 @@ class App extends React.Component {
               <ChangeTab
                 loadDepartmentSearch={(id) => this.loadDepartmentSearch(id)}
                 loadFreeWordSearch={(word) => this.loadFreeWordSearch(word)}/>
-              <MemberList  memberList={this.state.memberList}/>
+              <MemberList memberList={this.state.memberList}/>
             </div>
         );
     }
