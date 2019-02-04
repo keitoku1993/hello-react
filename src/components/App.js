@@ -8,6 +8,7 @@ import MemberList from './MemberList'
 class App extends React.Component {
 
     httpClient = '';
+    user = {};
 
     constructor(props){
         super(props);
@@ -52,7 +53,6 @@ class App extends React.Component {
         return this.httpClient.get('/who/departments')
             .then(this.commonResponseHandling)
             .then((result)=>{
-                console.log(result);
                 this.setState({departmentList : result});
             })
     }
@@ -60,8 +60,13 @@ class App extends React.Component {
         return this.httpClient.get('/who/search', {params:{department_id:id}})
             .then(this.commonResponseHandling)
             .then((result)=>{
-                console.log(result);
-                this.setState({memberList : result.item_list});
+                const memberList = [];
+                const userList = result.item_list;
+                console.log(userList)
+                userList.forEach((item) => {
+                    memberList.push(this.loadUserSearch(item.user_id));
+                })
+                this.setState({memberList : memberList});
             })
     }
     loadFreeWordSearch(word){
@@ -73,10 +78,10 @@ class App extends React.Component {
             })
     }
     loadUserSearch(userId){
-        this.httpClient.get('/who/user/'+userId)
+        this.httpClient.get('/who/user/'+Number(userId))
             .then(this.commonResponseHandling)
             .then((result)=>{
-                return result;
+                console.log(result);
             })
     }
 
@@ -100,7 +105,7 @@ class App extends React.Component {
         return (
             <div>
               <Header />
-              <ChangeTab 
+              <ChangeTab
                 loadDepartmentSearch={(id) => this.loadDepartmentSearch(id)}
                 loadFreeWordSearch={(word) => this.loadFreeWordSearch(word)}/>
               <MemberList  memberList={this.state.memberList}/>

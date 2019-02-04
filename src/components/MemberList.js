@@ -2,21 +2,17 @@ import React from 'react';
 
 import '../stylesheet/MemberList.css'
 
-const MemberList = (props) => {
+const MemberList = (props) =>  {
     console.log(props.memberList);
-    const userList = [];
-    props.memberList.forEach((value)=>{
-        user = props.loadUserSearch(value.user_id);
-        userList.push(user);
-    })
-    const userList = props.memberList.map((value)=>{
+    const memberList = props.memberList.map((value)=>{
         return (
-            <li>{value.user_name}</li>
+            <li className="memberList-item">
+                aaa
+            </li>
         )
     })
-
     return(
-        <ul>{memberList}</ul>
+        <ul className="memberList">{memberList}</ul>
     )
 }
 
