@@ -8,14 +8,13 @@ import MemberList from './MemberList'
 class App extends React.Component {
 
     httpClient = '';
-    user = {};
+    user = [];
 
     constructor(props){
         super(props);
         this.state = {
             isLogin:false,
             memberList : [],
-            user:null,
             departmentList: [],
         };
     }
@@ -60,20 +59,18 @@ class App extends React.Component {
         return this.httpClient.get('/who/search', {params:{department_id:id}})
             .then(this.commonResponseHandling)
             .then((result)=>{
-                const memberList = [];
                 const userList = result.item_list;
-                console.log(userList)
+                this.user = [];
                 userList.forEach((item) => {
-                    memberList.push(this.loadUserSearch(item.user_id));
+                    this.loadUserSearch(item.user_id);
                 })
-                this.setState({memberList : memberList});
+                this.setState({memberList : this.user});
             })
     }
     loadFreeWordSearch(word){
         return this.httpClient.get('/who/search', {params:{query:word}})
             .then(this.commonResponseHandling)
             .then((result)=>{
-                console.log(result);
                 this.setState({memberList : result.item_list});
             })
     }
@@ -81,7 +78,7 @@ class App extends React.Component {
         this.httpClient.get('/who/user/'+Number(userId))
             .then(this.commonResponseHandling)
             .then((result)=>{
-                console.log(result);
+                this.user.push(result);
             })
     }
 
