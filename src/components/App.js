@@ -56,16 +56,43 @@ class App extends React.Component {
             })
     }
     loadDepartmentSearch(id){
-        return this.httpClient.get('/who/search', {params:{department_id:id}})
+        return this.httpClient.get('/who/search', {params:{department_id:id, page: "1"}})
             .then(this.commonResponseHandling)
             .then((result)=>{
-                const userList = result.item_list;
                 this.user = [];
-                const promises = [];
-                userList.forEach((item) => {
-                    promises.push(this.loadUserSearch(item.user_id));
-                })
-                Promise.all(promises).then(()=>this.setState({memberList : this.user}));
+                let userList= [] 
+                userList = userList.concat(result.item_list);
+                if(result.item_list.length === 20){
+                    this.httpClient.get('/who/search', {params:{department_id:id, page: "2"}})
+                    .then(this.commonResponseHandling)
+                    .then((result)=>{
+                        userList = userList.concat(result.item_list);
+                        if(result.item_list.length === 20){
+                            this.httpClient.get('/who/search', {params:{department_id:id, page: "3"}})
+                            .then(this.commonResponseHandling)
+                            .then((result)=>{
+                                userList = userList.concat(result.item_list);
+                                const promises = [];
+                                userList.forEach((item) => {
+                                    promises.push(this.loadUserSearch(item.user_id));
+                                })
+                                Promise.all(promises).then(()=>this.setState({memberList : this.user}));
+                            })
+                        }else{
+                            const promises = [];
+                            userList.forEach((item) => {
+                                promises.push(this.loadUserSearch(item.user_id));
+                            })
+                            Promise.all(promises).then(()=>this.setState({memberList : this.user}));
+                        }
+                    })
+                }else{
+                    const promises = [];
+                    userList.forEach((item) => {
+                        promises.push(this.loadUserSearch(item.user_id));
+                    })
+                    Promise.all(promises).then(()=>this.setState({memberList : this.user}));
+                }
             })
     }
     loadFreeWordSearch(word){
