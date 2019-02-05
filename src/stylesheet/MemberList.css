@@ -7,17 +7,17 @@
 }
 
 .memberlist-item{
-    width:150px;
+    width:132px;
     border:1px solid #eee;
     border-radius:6px;
     text-align:center;
     margin:8px;
     box-shadow:4px 8px 20px -7px #6d786d;
-    padding:20px 10px;
+    padding:20px 20px;
 }
 
 .item-image{
-    width:100px;
+    width:120px;
     border-radius:50%;
 }
 
@@ -29,4 +29,21 @@
 .item-department{
     font-size:12px;
     color: darkgray;
+}
+
+@media screen and (max-width:480px) { 
+    /*　画面サイズが480pxからはここを読み込む　*/
+    .memberlist-item{
+        width:90px;
+    }
+    .item-image{
+        width:80px;
+        border-radius:50%;
+    }
+    .item-name{
+        font-size:14px;
+    }
+    .item-department{
+        font-size:11px;
+    }
 }
