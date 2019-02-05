@@ -72,24 +72,6 @@ class App extends React.Component {
                             .then(this.commonResponseHandling)
                             .then((result)=>{
                                 userList = userList.concat(result.item_list);
-                                if(result.item_list.length === 20){
-                                    this.httpClient.get('/who/search', {params:{department_id:id, page: "4"}})
-                                    .then(this.commonResponseHandling)
-                                    .then((result)=>{
-                                        userList = userList.concat(result.item_list);
-                                        const promises = [];
-                                        userList.forEach((item) => {
-                                            promises.push(this.loadUserSearch(item.user_id));
-                                        })
-                                        Promise.all(promises).then(()=>this.setState({memberList : this.user}));
-                                    })
-                                }else{
-                                    const promises = [];
-                                    userList.forEach((item) => {
-                                        promises.push(this.loadUserSearch(item.user_id));
-                                    })
-                                    Promise.all(promises).then(()=>this.setState({memberList : this.user}));
-                                }
                                 const promises = [];
                                 userList.forEach((item) => {
                                     promises.push(this.loadUserSearch(item.user_id));
