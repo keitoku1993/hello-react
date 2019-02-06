@@ -3,6 +3,13 @@ import React from 'react';
 import '../stylesheet/Modal.css'
 
 const Modal = (props) =>  {
+    console.log(props.modalData.pr)
+    let modalPR;
+    if(props.modalData.pr != null){
+       modalPR = <div className="modal-PR">{props.modalData.pr}</div>
+    }else{
+        modalPR = null; 
+    }
     return(
         <div className="modal-overlay" onClick={props.modalClose}>
             <div className="modal">
@@ -15,7 +22,7 @@ const Modal = (props) =>  {
                     <div className="modal-date">入社日：{props.modalData.date}</div>
                     <div className="modal-mail"><a href={props.modalData.mail}>{props.modalData.mail}</a></div>
                 </div>
-                <div className="modal-PR">{props.modalData.pr}</div>
+                {modalPR}
             </div>
         </div>
     )
