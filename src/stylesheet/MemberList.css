@@ -81,9 +81,6 @@
     .item-department{
         font-size:11px;
     }
-    .memberlist-item:before{
-        display:none;
-    }
     .item-caption{
         display:none;
     }

@@ -10,9 +10,12 @@ const Modal = (props) =>  {
                 <div className="modal-textarea">
                     <div className="modal-name">{props.modalData.name}</div>
                     <div className="modal-kana">{props.modalData.kana}</div>
-                    <div className="modal-department">{props.modalData.department}</div>
+                    <div className="modal-department">所属：{props.modalData.department}</div>
+                    <div className="modal-adana">ニックネーム：{props.modalData.adana}</div>
+                    <div className="modal-date">入社日：{props.modalData.date}</div>
                     <div className="modal-mail">{props.modalData.mail}</div>
                 </div>
+                <div className="modal-PR">{props.modalData.pr}</div>
             </div>
         </div>
     )

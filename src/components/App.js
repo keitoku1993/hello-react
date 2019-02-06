@@ -23,6 +23,9 @@ class App extends React.Component {
                 kana: '',
                 department:'',
                 mail: '',
+                adana: '',
+                date: '',
+                pr:'',
             }
         };
     }
@@ -128,12 +131,16 @@ class App extends React.Component {
         this.httpClient.get('/who/user/'+Number(modalTarget.user_id))
             .then(this.commonResponseHandling)
             .then((result)=>{
+                console.log(result);
                 modalData.modalOpen = true;
                 modalData.gazo = result.main_photo_url;
                 modalData.name = result.user_name;
                 modalData.kana = result.user_kana;
+                modalData.adana = result.nickname;
                 modalData.department = result.department_name;
                 modalData.mail = result.mail;
+                modalData.date = result.enter_date;
+                modalData.pr = result.description;
                 this.setState({
                     modalData: modalData,
                 })
@@ -151,6 +158,19 @@ class App extends React.Component {
         this.setState({ modalData: modalData });
       };
 
+    profileUpdate(inputData){
+        console.log(inputData);
+        var params = new URLSearchParams();
+        params.append('nickname', inputData.adana);
+        params.append('enter_date', inputData.enterDate);
+        params.append('description', inputData.pr);
+        this.httpClient.post('/profile/update', params)
+        .then(this.commonResponseHandling)
+        .then((result)=>{
+            console.log(result)
+        })
+    }
+
     render() {
         let modalComponent;
         if(this.state.modalData.modalOpen){
@@ -161,7 +181,8 @@ class App extends React.Component {
               <Header />
               <ChangeTab
                 loadDepartmentSearch={(id) => this.loadDepartmentSearch(id)}
-                loadFreeWordSearch={(word) => this.loadFreeWordSearch(word)}/>
+                loadFreeWordSearch={(word) => this.loadFreeWordSearch(word)}
+                profileUpdate={(inputData)=>this.profileUpdate(inputData)}/>
               <MemberList 
                 memberList={this.state.memberList} 
                 modalOpen={(index)=>this.modalOpen(index)} 

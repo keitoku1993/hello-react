@@ -14,6 +14,7 @@
     background-color:#fff;
     width:320px;
     border-radius:6px;
+    position:relative;
 }
 
 .modal-image{
@@ -33,11 +34,37 @@
     font-size:15px;
 }
 
+.modal-adana{
+    padding-top:8px;
+    font-size: 14px;
+}
+
 .modal-department{
-    padding-top:10px;
+    padding-top:8px;
+    font-weight:bold;
 }
 
 .modal-mail{
-    padding-top:4px;
+    font-size: 14px;
+}
+
+.modal-date{
+    font-size: 14px;
+}
+
+.modal-PR{
+    position: absolute;
+    background-color: snow;
+    border-radius: 14px;
+    right: -60px;
+    top: 20px;
+    transform: rotate(15deg);
+    opacity:0;
+    transition:all 0.4s ease;
+}
+
+.modal:hover .modal-PR{
+    opacity:1;
+    padding: 8px;
 }
 

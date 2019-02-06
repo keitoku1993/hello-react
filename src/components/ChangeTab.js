@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 import FreeWordSearch from './FreeWordSearch';
 import DepartmentSearch from './DepartmentSearch';
+import Update from './Update';
 
 function TabContainer(props) {
   return (
@@ -55,10 +56,12 @@ class ChangeTab extends React.Component {
           >
             <Tab label="部署名で絞り込み" />
             <Tab label="フリーワード検索" />
+            <Tab label="プロフィール更新" />
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer><DepartmentSearch loadDepartmentSearch={(id)=>this.props.loadDepartmentSearch(id)}/></TabContainer>}
         {value === 1 && <TabContainer><FreeWordSearch loadFreeWordSearch={(word)=>this.props.loadFreeWordSearch(word)}/></TabContainer>}
+        {value === 2 && <TabContainer><Update profileUpdate={(inputData)=>this.props.profileUpdate(inputData)}/></TabContainer>}
       </div>
     );
   }
