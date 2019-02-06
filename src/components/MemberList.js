@@ -4,12 +4,13 @@ import '../stylesheet/MemberList.css'
 
 const MemberList = (props) =>  {
     console.log('props.memberList:', props.memberList);
-    const memberList = props.memberList.map( (value) => {
+    const memberList = props.memberList.map( (value, index) => {
         return (
-            <li className="memberlist-item">
-                <img className="item-image" src={value.main_photo_url} alt=""/>
-                <div className="item-name">{value.user_name}</div>
-                <div className="item-department">{value.department_name}</div>
+            <li value={index} className="memberlist-item" onClick={(event) => props.modalOpen(event.target.value)}>
+                <img value={index} className="item-image" src={value.photo_url} alt="" onClick={(event) => props.modalOpen(event.target.value)}/>
+                <div value={index} className="item-name" onClick={(event) => props.modalOpen(event.target.value)}>{value.user_name}</div>
+                <div value={index} className="item-department" onClick={(event) => props.modalOpen(event.target.value)}>{value.department_name}</div>
+                <div value={index} className="item-caption" onClick={(event) => props.modalOpen(event.target.value)}>VIEW MORE</div>
             </li>
         )
     })

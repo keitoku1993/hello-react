@@ -1,0 +1,43 @@
+.modal-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background-color:rgba(0,0,0,0.4);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal{
+    background-color:#fff;
+    width:320px;
+    border-radius:6px;
+}
+
+.modal-image{
+    width:100%;
+    border-radius:6px 6px 0 0;
+}
+
+.modal-textarea{
+    padding:20px;
+}
+
+.modal-name{
+    font-size:24px;
+}
+
+.modal-kana{
+    font-size:15px;
+}
+
+.modal-department{
+    padding-top:10px;
+}
+
+.modal-mail{
+    padding-top:4px;
+}
+

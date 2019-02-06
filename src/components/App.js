@@ -4,11 +4,11 @@ import axios from 'axios';
 import Header from './Header';
 import ChangeTab from './ChangeTab';
 import MemberList from './MemberList'
+import Modal from './Modal'
 
 class App extends React.Component {
 
     httpClient = '';
-    user = [];
 
     constructor(props){
         super(props);
@@ -16,6 +16,14 @@ class App extends React.Component {
             isLogin:false,
             memberList : [],
             departmentList: [],
+            modalData:{
+                modalOpen: false,
+                gazo: '',
+                name: '',
+                kana: '',
+                department:'',
+                mail: '',
+            }
         };
     }
 
@@ -59,7 +67,6 @@ class App extends React.Component {
         return this.httpClient.get('/who/search', {params:{department_id:id, page: "1"}})
             .then(this.commonResponseHandling)
             .then((result)=>{
-                this.user = [];
                 let userList= [] 
                 userList = userList.concat(result.item_list);
                 if(result.item_list.length === 20){
@@ -72,26 +79,14 @@ class App extends React.Component {
                             .then(this.commonResponseHandling)
                             .then((result)=>{
                                 userList = userList.concat(result.item_list);
-                                const promises = [];
-                                userList.forEach((item) => {
-                                    promises.push(this.loadUserSearch(item.user_id));
-                                })
-                                Promise.all(promises).then(()=>this.setState({memberList : this.user}));
+                                this.setState({memberList : userList});
                             })
                         }else{
-                            const promises = [];
-                            userList.forEach((item) => {
-                                promises.push(this.loadUserSearch(item.user_id));
-                            })
-                            Promise.all(promises).then(()=>this.setState({memberList : this.user}));
+                            this.setState({memberList : userList});
                         }
                     })
                 }else{
-                    const promises = [];
-                    userList.forEach((item) => {
-                        promises.push(this.loadUserSearch(item.user_id));
-                    })
-                    Promise.all(promises).then(()=>this.setState({memberList : this.user}));
+                    this.setState({memberList : userList});
                 }
             })
     }
@@ -100,12 +95,7 @@ class App extends React.Component {
             .then(this.commonResponseHandling)
             .then((result)=>{
                 const userList = result.item_list;
-                this.user = [];
-                const promises = [];
-                userList.forEach((item) => {
-                    promises.push(this.loadUserSearch(item.user_id));
-                })
-                Promise.all(promises).then(()=>this.setState({memberList : this.user}));
+                this.setState({memberList : userList});
             })
     }
     loadUserSearch(userId){
@@ -132,14 +122,51 @@ class App extends React.Component {
             });
     };
 
+    modalOpen = (index) => {
+        const modalTarget = this.state.memberList[index];
+        const modalData = {};
+        this.httpClient.get('/who/user/'+Number(modalTarget.user_id))
+            .then(this.commonResponseHandling)
+            .then((result)=>{
+                modalData.modalOpen = true;
+                modalData.gazo = result.main_photo_url;
+                modalData.name = result.user_name;
+                modalData.kana = result.user_kana;
+                modalData.department = result.department_name;
+                modalData.mail = result.mail;
+                this.setState({
+                    modalData: modalData,
+                })
+            })
+    }
+
+    modalClose = () => {
+        const modalData = {
+            modalOpen: false,
+            gazo: '',
+            name: '',
+            department:'',
+            mail: '',
+        }
+        this.setState({ modalData: modalData });
+      };
+
     render() {
+        let modalComponent;
+        if(this.state.modalData.modalOpen){
+            modalComponent = <Modal modalData={this.state.modalData} modalClose={this.modalClose} />
+        }
         return (
             <div>
               <Header />
               <ChangeTab
                 loadDepartmentSearch={(id) => this.loadDepartmentSearch(id)}
                 loadFreeWordSearch={(word) => this.loadFreeWordSearch(word)}/>
-              <MemberList memberList={this.state.memberList}/>
+              <MemberList 
+                memberList={this.state.memberList} 
+                modalOpen={(index)=>this.modalOpen(index)} 
+                loadUserSearch={(userId)=>this.loadUserSearch(userId)}/>
+              {modalComponent}
             </div>
         );
     }
