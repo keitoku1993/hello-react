@@ -87,9 +87,9 @@ class Update extends React.Component {
         />
         <TextField
           id="outlined-full-width"
-          label="自己PR"
+          label="ひとこと"
           style={{ margin: 8 }}
-          placeholder="自己PRを入力してください"
+          placeholder="つぶやく"
           fullWidth
           value={this.state.pr}
           onChange={this.handleChangePR('pr')}

@@ -161,13 +161,19 @@ class App extends React.Component {
     profileUpdate(inputData){
         console.log(inputData);
         var params = new URLSearchParams();
-        params.append('nickname', inputData.adana);
-        params.append('enter_date', inputData.enterDate);
-        params.append('description', inputData.pr);
+        if(inputData.adana != ''){
+            params.append('nickname', inputData.adana);
+        }
+        if(inputData.enterDate != ''){
+            params.append('enter_date', inputData.enterDate);
+        }
+        if(inputData.pr != ''){
+            params.append('description', inputData.pr);
+        }
         this.httpClient.post('/profile/update', params)
         .then(this.commonResponseHandling)
         .then((result)=>{
-            console.log(result)
+            alert('プロフィールの更新が正常に完了しました。')
         })
     }
 
