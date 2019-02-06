@@ -13,7 +13,7 @@ const Modal = (props) =>  {
                     <div className="modal-department">所属：{props.modalData.department}</div>
                     <div className="modal-adana">ニックネーム：{props.modalData.adana}</div>
                     <div className="modal-date">入社日：{props.modalData.date}</div>
-                    <div className="modal-mail">{props.modalData.mail}</div>
+                    <div className="modal-mail"><a href={props.modalData.mail}>{props.modalData.mail}</a></div>
                 </div>
                 <div className="modal-PR">{props.modalData.pr}</div>
             </div>
