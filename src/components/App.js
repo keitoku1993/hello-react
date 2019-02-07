@@ -127,6 +127,7 @@ class App extends React.Component {
 
     modalOpen = (index) => {
         const modalTarget = this.state.memberList[index];
+        console.log('modalTarget:',modalTarget)
         const modalData = {};
         this.httpClient.get('/who/user/'+Number(modalTarget.user_id))
             .then(this.commonResponseHandling)
