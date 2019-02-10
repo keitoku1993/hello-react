@@ -50,7 +50,7 @@ class App extends React.Component {
         this.loadLoginUser()
     }
     loadAuth(){
-        return this.httpClient.get('/auth' , {params:{callback:'http://localhost:3000'}})
+        return this.httpClient.get('/auth' , {params:{callback:'https://peaceful-lovelace-8a8a0f.netlify.com/'}})
             .then(this.commonResponseHandling)
             .then((result)=>{
                 console.log(result);
