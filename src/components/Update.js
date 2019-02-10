@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+import '../stylesheet/Update.css'
+
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
@@ -30,10 +32,9 @@ const styles = theme => ({
 
 class Update extends React.Component {
   state = {
-    adana: '',
-    enterDate: '',
-    pr: '',
-    currency: 'EUR',
+    adana: this.props.loginUser.nickname,
+    enterDate: this.props.loginUser.enter_date,
+    pr: this.props.loginUser.description,
   };
 
   handleChangeAdana = adana => event => {
@@ -54,9 +55,11 @@ class Update extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log(this.props.loginUser)
 
     return (
       <form className={classes.container} noValidate autoComplete="off">
+        <div className="update-text">{this.props.loginUser.user_name}さんのプロフィールを更新します。</div>
         <TextField
           id="outlined-full-width"
           label="ニックネーム"

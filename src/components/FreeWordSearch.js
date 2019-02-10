@@ -52,12 +52,10 @@ class FreeWordSearch extends React.Component {
           className={classes.textField}
           value={this.state.name}
           onChange={this.handleChange('name')}
+          onKeyUp={()=>this.props.loadFreeWordSearch(this.state.name)}
           margin="normal"
           placeholder="単語を入れてください"
         />
-        <Button variant="contained" className={classes.button} onClick={()=>this.props.loadFreeWordSearch(this.state.name)}>
-          Search
-        </Button>
       </form>
     );
   }

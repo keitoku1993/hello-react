@@ -10,7 +10,7 @@ const MemberList = (props) =>  {
                 <img value={index} className="item-image" src={value.photo_url} alt="" onClick={(event) => props.modalOpen(event.target.value)}/>
                 <div value={index} className="item-name" onClick={(event) => props.modalOpen(event.target.value)}>{value.user_name}</div>
                 <div value={index} className="item-department" onClick={(event) => props.modalOpen(event.target.value)}>{value.department_name}</div>
-                <div value={index} className="item-caption" onClick={(event) => props.modalOpen(event.target.value)}>VIEW MORE</div>
+                <div value={index} className="item-caption">VIEW MORE</div>
             </li>
         )
     })

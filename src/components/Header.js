@@ -5,12 +5,15 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import grey from '@material-ui/core/colors/grey';
 import blue from '@material-ui/core/colors/blue';
+
+import '../stylesheet/Header.css'
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: blue[500] }, // Purple and green play nicely together.
-    secondary: { main: '#fff' },// This is just green.A700 as hex.
+    primary: { main: blue[900] }, 
+    secondary: { main: '#fff' },
   },
   typography: { useNextVariants: true },
 });
@@ -26,7 +29,8 @@ function Header(props) {
     <MuiThemeProvider theme={theme}>
       <AppBar position="static" color="primary">
         <Toolbar>
-          <Typography variant="h6" color="secondary">
+          <img className="header-logo" src="logo.svg" />
+          <Typography className="header-text" variant="h6" color="secondary">
             NIJIBOX Member List
           </Typography>
         </Toolbar>

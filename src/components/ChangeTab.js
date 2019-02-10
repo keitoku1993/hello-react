@@ -61,7 +61,7 @@ class ChangeTab extends React.Component {
         </AppBar>
         {value === 0 && <TabContainer><DepartmentSearch loadDepartmentSearch={(id)=>this.props.loadDepartmentSearch(id)}/></TabContainer>}
         {value === 1 && <TabContainer><FreeWordSearch loadFreeWordSearch={(word)=>this.props.loadFreeWordSearch(word)}/></TabContainer>}
-        {value === 2 && <TabContainer><Update profileUpdate={(inputData)=>this.props.profileUpdate(inputData)}/></TabContainer>}
+        {value === 2 && <TabContainer><Update profileUpdate={(inputData)=>this.props.profileUpdate(inputData)} loginUser={this.props.loginUser}/></TabContainer>}
       </div>
     );
   }

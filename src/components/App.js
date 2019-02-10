@@ -14,6 +14,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             isLogin:false,
+            loginUser: null,
             memberList : [],
             departmentList: [],
             modalData:{
@@ -46,18 +47,27 @@ class App extends React.Component {
                 alert("APIがエラーを返しました\n\n" + err);
             });
         
-        this.loadDepartment()
+        this.loadLoginUser()
     }
     loadAuth(){
         return this.httpClient.get('/auth' , {params:{callback:'http://localhost:3000'}})
             .then(this.commonResponseHandling)
             .then((result)=>{
+                console.log(result);
                 if(result.is_login){
                     this.setState({isLogin:true});
                 }else if(result.auth_url){
                     window.location.href = result.auth_url;
                 }
             });
+    }
+    loadLoginUser(){
+        return this.httpClient.get('/profile/get')
+            .then(this.commonResponseHandling)
+            .then((result)=>{
+                console.log(result)
+                this.setState({loginUser : result});
+            })
     }
     loadDepartment(){
         return this.httpClient.get('/who/departments')
@@ -189,7 +199,8 @@ class App extends React.Component {
               <ChangeTab
                 loadDepartmentSearch={(id) => this.loadDepartmentSearch(id)}
                 loadFreeWordSearch={(word) => this.loadFreeWordSearch(word)}
-                profileUpdate={(inputData)=>this.profileUpdate(inputData)}/>
+                profileUpdate={(inputData)=>this.profileUpdate(inputData)}
+                loginUser={this.state.loginUser}/>
               <MemberList 
                 memberList={this.state.memberList} 
                 modalOpen={(index)=>this.modalOpen(index)} 
