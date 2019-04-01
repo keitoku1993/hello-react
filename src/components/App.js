@@ -92,7 +92,16 @@ class App extends React.Component {
                             .then(this.commonResponseHandling)
                             .then((result)=>{
                                 userList = userList.concat(result.item_list);
-                                this.setState({memberList : userList});
+                                if(result.item_list.length === 20) {
+                                    this.httpClient.get('/who/search', {params:{department_id:id, page: "4"}})
+                                    .then(this.commonResponseHandling)
+                                    .then((result) => {
+                                        userList = userList.concat(result.item_list);
+                                        this.setState({memberList : userList});
+                                    })
+                                }else {
+                                    this.setState({memberList : userList});
+                                }
                             })
                         }else{
                             this.setState({memberList : userList});
