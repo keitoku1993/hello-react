@@ -31,7 +31,7 @@ function Header(props) {
         <Toolbar>
           <img className="header-logo" src="logo.svg" />
           <Typography className="header-text" variant="h6" color="secondary">
-            NIJIBOX Member List
+            NIJIBOX Member Listtttttt
           </Typography>
         </Toolbar>
       </AppBar>
