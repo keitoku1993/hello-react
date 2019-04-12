@@ -9,7 +9,7 @@ npm startでローカルサーバが立ち上がります。(デフォルトは3
 
 ### `npm start`
 
-編集後に、npm run buildでbuildフォルダにバンドルされたindex.htmlが配置されます。
-デプロイ時には、このindex.htmlを読み込んでください。
+編集後に、npm run buildでbuildフォルダにバンドルされた資材が配置されます。
+デプロイ時には、このbuildフォルダを読み込んでください。
 
 ### `npm run build`
