@@ -3,7 +3,6 @@ import React from 'react';
 import '../stylesheet/Modal.css'
 
 const Modal = (props) =>  {
-    console.log(props.modalData.pr)
     let modalPR;
     if(props.modalData.pr != null){
        modalPR = <div className="modal-PR">{props.modalData.pr}</div>

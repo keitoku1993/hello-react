@@ -53,7 +53,6 @@ class App extends React.Component {
         return this.httpClient.get('/auth' , {params:{callback:'https://peaceful-lovelace-8a8a0f.netlify.com/'}})
             .then(this.commonResponseHandling)
             .then((result)=>{
-                console.log(result);
                 if(result.is_login){
                     this.setState({isLogin:true});
                 }else if(result.auth_url){
@@ -65,7 +64,6 @@ class App extends React.Component {
         return this.httpClient.get('/profile/get')
             .then(this.commonResponseHandling)
             .then((result)=>{
-                console.log(result)
                 this.setState({loginUser : result});
             })
     }
@@ -129,9 +127,7 @@ class App extends React.Component {
     }
 
     commonResponseHandling(res){
-        // console.debug(res);
         if(res.data.code !== "200"){
-            // console.error(res.data.data);
             return Promise.reject("API Error:" + res.data.data.message);
         }
         return Promise.resolve(res.data.data);
@@ -146,12 +142,10 @@ class App extends React.Component {
 
     modalOpen = (index) => {
         const modalTarget = this.state.memberList[index];
-        console.log('modalTarget:',modalTarget)
         const modalData = {};
         this.httpClient.get('/who/user/'+Number(modalTarget.user_id))
             .then(this.commonResponseHandling)
             .then((result)=>{
-                console.log(result);
                 modalData.modalOpen = true;
                 modalData.gazo = result.main_photo_url;
                 modalData.name = result.user_name;
@@ -179,7 +173,6 @@ class App extends React.Component {
       };
 
     profileUpdate(inputData){
-        console.log(inputData);
         var params = new URLSearchParams();
         if(inputData.adana != ''){
             params.append('nickname', inputData.adana);

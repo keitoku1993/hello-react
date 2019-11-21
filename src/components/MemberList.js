@@ -3,7 +3,6 @@ import React from 'react';
 import '../stylesheet/MemberList.css'
 
 const MemberList = (props) =>  {
-    console.log('props.memberList:', props.memberList);
     const memberList = props.memberList.map( (value, index) => {
         return (
             <li value={index} className="memberlist-item" onClick={(event) => props.modalOpen(event.target.value)}>
